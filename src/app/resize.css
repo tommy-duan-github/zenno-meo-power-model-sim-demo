@@ -1,0 +1,115 @@
+.sim-grid {
+  grid-template-columns: var(--input-width, 318px) 12px minmax(0, 1fr) 12px var(--view-width, 338px);
+  gap: 0;
+}
+
+.sim-grid > .controls,
+.sim-grid > .outputs,
+.sim-grid > .view-panel {
+  grid-column: auto;
+  grid-row: auto;
+  min-width: 0;
+}
+
+.sim-grid > .controls,
+.sim-grid > .view-panel {
+  position: sticky;
+  top: 78px;
+  max-height: calc(100vh - 91px);
+}
+
+.sim-grid > .outputs {
+  max-height: calc(100vh - 91px);
+}
+
+.sim-grid .canvas-wrap {
+  height: 360px;
+}
+
+.panel-divider {
+  position: sticky;
+  top: 78px;
+  height: calc(100vh - 91px);
+  min-height: 240px;
+  cursor: col-resize;
+  touch-action: none;
+  outline: none;
+}
+
+.panel-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  width: 4px;
+  height: 54px;
+  transform: translateY(-50%);
+  border-radius: 8px;
+  background: #b9c8d3;
+  transition: background .15s, width .15s, left .15s;
+}
+
+.panel-divider:hover::before,
+.panel-divider:focus-visible::before,
+.is-resizing .panel-divider::before {
+  left: 3px;
+  width: 6px;
+  background: var(--blue);
+}
+
+.panel-divider:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+  border-radius: 5px;
+}
+
+.is-resizing {
+  user-select: none;
+}
+
+.number-control input[type=range] {
+  min-width: 0;
+}
+
+.outputs {
+  container-type: inline-size;
+}
+
+.output-stack {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.output-card {
+  min-width: 0;
+}
+
+@container (max-width: 500px) {
+  .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .outputs-header { flex-wrap: wrap; }
+  .output-card { padding: 14px; }
+}
+
+html[data-theme="dark"] .panel-divider::before {
+  background: #607888;
+}
+
+html[data-theme="dark"] .panel-divider:hover::before,
+html[data-theme="dark"] .panel-divider:focus-visible::before,
+html[data-theme="dark"] .is-resizing .panel-divider::before {
+  background: var(--blue);
+}
+
+@media (max-width: 900px) {
+  .sim-grid { display: block; }
+  .panel-divider { display: none; }
+  .sim-grid > .controls,
+  .sim-grid > .outputs,
+  .sim-grid > .view-panel {
+    position: relative;
+    top: auto;
+    max-height: none;
+    margin-bottom: 12px;
+  }
+  .sim-grid > .controls { max-height: 550px; }
+  .sim-grid .canvas-wrap { height: 300px; }
+}

@@ -34,3 +34,32 @@ test('header tabs and dark mode work across both pages',async({page})=>{
   await page.getByRole('button',{name:'Switch to light mode'}).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
 });
+
+test('simulator panels resize by dragging and keyboard, then retain their widths',async({page})=>{
+  await page.setViewportSize({width:1440,height:900});
+  await page.goto('/');
+  await expect(page.getByText('Simulation results')).toBeVisible();
+  const inputDivider=page.getByRole('separator',{name:'Resize parameter input and simulation results'});
+  const viewDivider=page.getByRole('separator',{name:'Resize simulation results and visualisation'});
+  const originalInput=Number(await inputDivider.getAttribute('aria-valuenow'));
+  const handle=await inputDivider.boundingBox();
+  expect(handle).not.toBeNull();
+  await page.mouse.move(handle!.x+handle!.width/2,handle!.y+handle!.height/2);
+  await page.mouse.down();
+  await page.mouse.move(handle!.x+handle!.width/2+80,handle!.y+handle!.height/2,{steps:5});
+  await page.mouse.up();
+  await expect.poll(async()=>Number(await inputDivider.getAttribute('aria-valuenow'))).toBeGreaterThan(originalInput+50);
+  const originalView=Number(await viewDivider.getAttribute('aria-valuenow'));
+  await viewDivider.focus();
+  await page.keyboard.press('ArrowLeft');
+  await expect.poll(async()=>Number(await viewDivider.getAttribute('aria-valuenow'))).toBe(originalView+16);
+  const resizedInput=await inputDivider.getAttribute('aria-valuenow');
+  const resizedView=await viewDivider.getAttribute('aria-valuenow');
+  await page.reload();
+  await expect(inputDivider).toHaveAttribute('aria-valuenow',resizedInput!);
+  await expect(viewDivider).toHaveAttribute('aria-valuenow',resizedView!);
+  await page.setViewportSize({width:1100,height:800});
+  const results=await page.locator('#results-panel').boundingBox();
+  const card=await page.locator('.output-card').first().boundingBox();
+  expect(card!.x+card!.width).toBeLessThanOrEqual(results!.x+results!.width+1);
+});

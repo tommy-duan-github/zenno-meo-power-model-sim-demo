@@ -11,6 +11,8 @@ npm run dev
 
 Open `http://localhost:3000`. `npm run build` writes the static site to `out/`. Run `npm test` for engine checks and `npm run test:e2e` for browser smoke tests.
 
+On desktop, drag either divider between the input, results, and visualisation panels to resize them. Focus a divider and use the left or right arrow keys for finer control; Shift moves it farther. Panel widths are saved in the browser.
+
 ## Model map
 
 `src/engine/` follows the diagram blocks: configuration, orbit and environment, power gain, power used, battery, design loops, and outputs. The simulator page is interactive. `/model` has explanatory Python-style snippets and the assumptions inventory.

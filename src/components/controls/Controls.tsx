@@ -20,7 +20,7 @@ function Field({field}: {field:FieldDescriptor}){
 export default function Controls(){
   const cfg=useSimStore(s=>s.cfg),preset=useSimStore(s=>s.preset),setPreset=useSimStore(s=>s.setPreset),setCfg=useSimStore(s=>s.setCfg);const [advanced,setAdvanced]=useState(false);
   const groups=['Scenario','Orbit','Environment','Power gain','Power used','Battery','Rules','Design loops'];
-  return <aside className="controls panel"><div className="panel-head"><div><div className="eyebrow">01 / INPUTS</div><h2>Scenario controls</h2></div><button className="text-button" onClick={()=>setCfg(defaultConfig(preset))}>Reset all</button></div>
+  return <aside id="input-panel" className="controls panel"><div className="panel-head"><div><div className="eyebrow">01 / INPUTS</div><h2>Scenario controls</h2></div><button className="text-button" onClick={()=>setCfg(defaultConfig(preset))}>Reset all</button></div>
     <div className="preset-row"><label htmlFor="preset">Spacecraft preset</label><select id="preset" value={preset} onChange={e=>setPreset(e.target.value as Preset)}><option value="smallMeo">Small MEO</option><option value="gnssClass">GNSS class</option></select></div>
     {groups.map((group,i)=><details className="control-group" key={group} open={i<2?true:undefined}><summary><span className={`group-dot dot-${i}`}/>{group}<span className="chevron">⌄</span></summary><div className="group-body">{group==='Orbit'&&<div className="orbit-presets">{ORBITS.map(([name,alt,inc])=><button key={name} onClick={()=>setCfg({...cfg,orbit:{...cfg.orbit,altitudeKm:alt,inclinationDeg:inc},sim:{...cfg.sim,worstCase:false}})}>{name}</button>)}</div>}
     {FIELDS.filter(f=>f.group===group&&(!f.advanced||advanced)).map(field=><Field key={field.path} field={field}/>)}
