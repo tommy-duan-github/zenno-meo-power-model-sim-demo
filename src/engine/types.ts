@@ -1,0 +1,12 @@
+import type { ScenarioConfig } from './config';
+export type Vec3 = [number, number, number];
+export type Subsystem = 'payload' | 'adcs' | 'comms' | 'thermal' | 'torquer' | 'cryocooler';
+export const SUBSYSTEMS: Subsystem[] = ['payload','adcs','comms','thermal','torquer','cryocooler'];
+export interface Environment { t: Float64Array; dt: number; period: number; rEci: Float64Array; sunHat: Vec3; inEclipse: Uint8Array; cosSun: Float64Array; bVec: Float64Array; bMag: Float64Array; contact: Uint8Array; stationVisible: Uint8Array[]; beta: number; betaStar: number; eclipseDuration: number; }
+export interface LoadSet { requested: Record<Subsystem, Float64Array>; torquerOn: Uint8Array; coolerOn: Uint8Array; info: { tOn: number; duty: number; feasible: boolean; conventionalTOn: number; coolerWhAlwaysOn: number; coolerWhOnDemand: number; coolerModeUsed: ScenarioConfig['used']['cooler']['mode']; dH: number; peakTorque: number; disturbanceTorque: number; }; }
+export interface BatteryResult { soc: Float64Array; actual: Record<Subsystem, Float64Array>; shed: Uint8Array; shuntedW: Float64Array; depleted: boolean; }
+export interface Kpis { periodH: number; eclipseMin: number; eclipseFrac: number; betaStarDeg: number; pGenSunlitW: number; avgGenW: number; avgLoadW: number; peakLoadW: number; energyMarginPct: number; dod: number; dodLimit: number; dodPass: boolean; sustainable: boolean; torquerTOnS: number; torquerDuty: number; torquerFeasible: boolean; conventionalTOnS: number; coolerWhAlwaysOn: number; coolerWhOnDemand: number; coolerModeUsed: string; z01SharePct: number; contactHPerOrbit: number; shedMin: number; peakTorqueNm: number; disturbanceTorqueNm: number; }
+export interface Series { tH: number[]; soc: number[]; pGen: number[]; pLoad: number[]; loads: Record<Subsystem, number[]>; eclipse: number[]; contact: number[]; bNT: number[]; tauAvail: number[]; torquerOn: number[]; coolerOn: number[]; shed: number[]; }
+export interface BudgetRow { subsystem: Subsystem; avgW: number; peakW: number; sunW: number; eclipseW: number; whOrbit: number; sharePct: number; }
+export interface Geometry { rOrbitRe: number; incDeg: number; betaDeg: number; sunHat: Vec3; orbitRing: Vec3[]; ringEclipse: boolean[]; satTrack: Vec3[]; stations: {name:string; ecefRe:Vec3; visible:boolean[]}[]; }
+export interface SimResult { kpis: Kpis; series: Series; budget: BudgetRow[]; geometry: Geometry; warnings: string[]; meta: { nSteps:number; dtS:number; runtimeMs:number; engineVersion:string }; }

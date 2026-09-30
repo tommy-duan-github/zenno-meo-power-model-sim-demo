@@ -1,0 +1,46 @@
+.header-actions{display:flex;align-items:center;gap:12px}
+.page-tabs{display:flex!important;align-items:center;gap:3px!important;padding:3px;border:1px solid var(--line);border-radius:8px;background:#f2f5f7;font-size:12px!important}
+.page-tabs a{display:block;padding:7px 12px;border-radius:5px;color:var(--muted);font-weight:700;white-space:nowrap}
+.page-tabs a:hover{color:var(--blue)!important;background:#e6eff6}
+.page-tabs a.active{color:var(--blue);background:#fff;box-shadow:0 1px 3px #152a3b19}
+.theme-button{min-height:35px;display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);padding:6px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.theme-button:hover{border-color:var(--blue);color:var(--blue)}
+.theme-button span:first-child{font-size:18px;line-height:1}
+.page-tabs a:focus-visible,.theme-button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+html[data-theme="dark"]{color-scheme:dark;--ink:#e9f1f6;--muted:#adbdc9;--line:#344654;--blue:#75bdff;--pale:#1b2a36;--amber:#e0a251;--green:#52b88b}
+html[data-theme="dark"] body{background:#101920}
+html[data-theme="dark"] .site-header,html[data-theme="dark"] .panel,html[data-theme="dark"] .output-card,html[data-theme="dark"] .function-card{background:#182631}
+html[data-theme="dark"] .page-tabs{background:#0f1b24}
+html[data-theme="dark"] .page-tabs a.active{background:#263b4c;box-shadow:none}
+html[data-theme="dark"] .page-tabs a:hover{background:#203647}
+html[data-theme="dark"] .theme-button,html[data-theme="dark"] .play-button,html[data-theme="dark"] .picker-button{background:#1d2e3b;color:var(--ink)}
+html[data-theme="dark"] .preset-row select,html[data-theme="dark"] select,html[data-theme="dark"] .number-control input[type=number],html[data-theme="dark"] .analysis-inputs input{background:#14222d;border-color:#465969;color:var(--ink)}
+html[data-theme="dark"] .control-field{border-color:#293b49}
+html[data-theme="dark"] .orbit-presets button{background:#213440;color:var(--ink)}
+html[data-theme="dark"] .picker-popover{background:#1e303d;box-shadow:0 8px 26px #0008}
+html[data-theme="dark"] .chips button{background:#203c50;border-color:#375e77;color:#a8d9ff}
+html[data-theme="dark"] .kpi-label,html[data-theme="dark"] .kpi-value small{color:var(--muted)}
+html[data-theme="dark"] th{background:#21323e}
+html[data-theme="dark"] .canvas-wrap{background:#13212b}
+html[data-theme="dark"] .mini-kpis>div,html[data-theme="dark"] .formula{background:#1b2d3a}
+html[data-theme="dark"] .case-note{background:#342c1d;border-color:#5c492a;color:#efc98d}
+html[data-theme="dark"] .placeholder{color:#e0b770!important}
+html[data-theme="dark"] .status-pill.pass{background:#183c30;color:#9be1b9}
+html[data-theme="dark"] .status-pill.fail{background:#4d2929;color:#f6aaa1}
+html[data-theme="dark"] .status-pill.stale{background:#493a21;color:#f2cb87}
+html[data-theme="dark"] .kpi-value.bad,html[data-theme="dark"] .field-error{color:#ff9a90}
+html[data-theme="dark"] .output-card ul{color:#e5bd83}
+html[data-theme="dark"] .assumption{border-color:#2a3c49}
+html[data-theme="dark"] .block-tag,html[data-theme="dark"] .origin{background:#273e4c;color:#c0d3df}
+html[data-theme="dark"] .origin.placeholder{background:#493621;color:#f0c88b}
+html[data-theme="dark"] .origin.user-note{background:#1f3e58;color:#acd6ff}
+html[data-theme="dark"] .code-wrap pre{filter:invert(1) hue-rotate(180deg)}
+html[data-theme="dark"] .recharts-cartesian-axis-tick-value{fill:#b6c6d1}
+html[data-theme="dark"] .recharts-cartesian-grid line{stroke:#30424f}
+html[data-theme="dark"] .recharts-reference-area rect{fill:#2d526c;fill-opacity:.3}
+html[data-theme="dark"] .recharts-default-tooltip{background:#223542!important;border-color:#496174!important}
+html[data-theme="dark"] .recharts-tooltip-label{color:var(--ink)}
+
+@media(max-width:1050px){.brand-sub{display:none}.brand strong{font-size:14px}.site-header{padding:0 14px}}
+@media(max-width:760px){.site-header{height:auto;min-height:64px;flex-wrap:wrap;gap:8px;padding:8px 12px}.brand{width:100%}.header-actions{width:100%;justify-content:space-between}.page-tabs a{padding:6px 8px}.theme-button{padding:6px 8px}.theme-button span:last-child{display:none}}
